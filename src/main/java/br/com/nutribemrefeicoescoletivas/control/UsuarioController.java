@@ -13,9 +13,11 @@ public class UsuarioController {
     public UsuarioBean consultar(UsuarioBean user) throws SQLException{
         return (UsuarioBean) new UsuarioDao().busca(user);
     }
-    
     public Object busca(Object use) throws SQLException{
         UsuarioBean user = (UsuarioBean) use;
         return new UsuarioDao().busca(user);
+    }
+    public boolean cadastrar(Object use) throws SQLException{
+        return new UsuarioDao().salvar(use);
     }
 }

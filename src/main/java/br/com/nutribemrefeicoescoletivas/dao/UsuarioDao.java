@@ -13,9 +13,10 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class UsuarioDao extends Conn{
-    public void cadastra(Object usernc) throws SQLException{
+    public boolean salvar(Object usernc) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException{
         UsuarioBean user = (UsuarioBean) usernc;
-        sql = "INSERT INTO usuario (Nome, Login, Senha) VALUES (?, ?, ?);";
+        boolean rt = false;
+        sql = "INSERT INTO usuario (Nome, Email, Login, Senha) VALUES ( ?, ?, ?, ?);";
         try {
             con = Conn.getConexao();
         }catch(SQLException xp){
@@ -25,14 +26,21 @@ public class UsuarioDao extends Conn{
             stmt = con.prepareStatement(sql);
             stmt.setString(1, user.getNome());
             stmt.setString(2, user.getLogin());
-            stmt.setString(3, user.getSenha());
+            stmt.setString(3, user.getEmail());
+            stmt.setString(4, new Criptografia().criptografa(user.getSenha()));
             stmt.execute();
-            stmt.close();
-            JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
+            rt = true;
+            //JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
         }catch(SQLException e){
-            JOptionPane.showMessageDialog(null, "Erro ao cadastrar!");
+            e.printStackTrace();
+            rt = false;
+            //JOptionPane.showMessageDialog(null, "Erro ao cadastrar!");
+        }finally{
+            stmt.close();
+            con.close();
         }
-        con.close();
+        
+        return rt;
     }
     public void atualiza(Object usernc) throws SQLException{
         UsuarioBean user = (UsuarioBean) usernc;

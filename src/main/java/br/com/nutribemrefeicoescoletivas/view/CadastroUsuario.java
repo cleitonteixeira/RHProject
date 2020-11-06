@@ -5,12 +5,15 @@
  */
 package br.com.nutribemrefeicoescoletivas.view;
 
+import br.com.nutribemrefeicoescoletivas.bean.UsuarioBean;
+import br.com.nutribemrefeicoescoletivas.control.UsuarioController;
 import br.com.nutribemrefeicoescoletivas.mail.ConfigMail;
 import java.net.MalformedURLException;
+import java.sql.SQLException;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.commons.mail.EmailException;
-
 
 public class CadastroUsuario extends javax.swing.JDialog {
 
@@ -23,6 +26,18 @@ public class CadastroUsuario extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(this);
+    }
+    
+    
+    
+    public String gerarString() {
+        String letras = "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvXxYyWwZz123456789";
+        Random random = new Random();
+        StringBuilder saida = new StringBuilder();
+        for (int i = 0; i < 8; i++) { 
+            saida.append(letras.charAt(random.nextInt(letras.length()))); 
+        } 
+        return saida.toString(); 
     }
 
     /**
@@ -240,8 +255,20 @@ public class CadastroUsuario extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BTSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTSalvarActionPerformed
+        UsuarioBean ub = new UsuarioBean();
         try {
-            new ConfigMail().enviaEmailFormatoHtml( CpNome.getText(), CpLogin.getText() );
+            ub.setLogin(CpLogin.getText());
+            ub.setEmail(CpEmail.getText());
+            ub.setNome(CpNome.getText());
+            ub.setSenha(gerarString());
+            
+            try {
+                if(new UsuarioController().cadastrar(ub)){
+                    new ConfigMail().enviaEmailFormatoHtml( ub );
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(CadastroUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } catch (EmailException | MalformedURLException ex) {
             Logger.getLogger(CadastroUsuario.class.getName()).log(Level.SEVERE, null, ex);
         }

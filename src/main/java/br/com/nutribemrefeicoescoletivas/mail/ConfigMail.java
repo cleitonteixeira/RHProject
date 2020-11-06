@@ -1,5 +1,6 @@
 package br.com.nutribemrefeicoescoletivas.mail;
 
+import br.com.nutribemrefeicoescoletivas.bean.UsuarioBean;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -9,7 +10,7 @@ import org.apache.commons.mail.HtmlEmail;
 
 public class ConfigMail {
     
-    public void enviaEmailFormatoHtml(String Nome, String Email) throws EmailException, MalformedURLException {
+    public void enviaEmailFormatoHtml(UsuarioBean ub) throws EmailException, MalformedURLException {
 	
 	HtmlEmail email = new HtmlEmail();
 	
@@ -24,10 +25,10 @@ public class ConfigMail {
 	email.setTextMsg("Seu servidor de e-mail não suporta mensagem HTML");
 	
 	email.setHostName("smtp.nutribemrefeicoescoletivas.com.br"); // o servidor SMTP para envio do e-mail
-	email.addTo( Nome, Email ); //destinatário
+	email.addTo( ub.getEmail(), ub.getNome() ); //destinatário
 	email.setFrom("contato@nutribemrefeicoescoletivas.com.br", "Não responda"); // remetente
 	email.setSubject("Teste -> Html Email"); // assunto do e-mail
-	email.setMsg("Teste de Email HTML utilizando commons-email"); //conteudo do e-mail
+	email.setMsg("Seu usuário no sistema do RH-Nutribem é "+ub.getLogin()+" ./n E sua senha é "+ub.getSenha()+" ./n Troque sua senha no primeiro login."); //conteudo do e-mail
 	email.setAuthentication("ti@nutribemrefeicoescoletivas.com.br", "Nutri@1748");
 	email.setSmtpPort(587);
 	//email.setSSLCheckServerIdentity(true);
