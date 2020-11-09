@@ -1,18 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.nutribemrefeicoescoletivas.view;
 
 import br.com.nutribemrefeicoescoletivas.bean.UsuarioBean;
 import br.com.nutribemrefeicoescoletivas.control.UsuarioController;
 import br.com.nutribemrefeicoescoletivas.mail.ConfigMail;
+import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import org.apache.commons.mail.EmailException;
 
 public class CadastroUsuario extends javax.swing.JDialog {
@@ -261,12 +259,17 @@ public class CadastroUsuario extends javax.swing.JDialog {
             ub.setEmail(CpEmail.getText());
             ub.setNome(CpNome.getText());
             ub.setSenha(gerarString());
-            
             try {
                 if(new UsuarioController().cadastrar(ub)){
-                    new ConfigMail().enviaEmailFormatoHtml( ub );
+                    if(new ConfigMail().enviaEmailFormatoHtml( ub )){
+                        JOptionPane.showMessageDialog(this, "Usuário Cadastrado e e-mail enviado.");
+                    }else{
+                        JOptionPane.showMessageDialog(this, "Usuário Cadastrado e e-mail não enviado.");
+                    }
+                }else{
+                    JOptionPane.showMessageDialog(this, "Falha ao cadastrar Usuário.");
                 }
-            } catch (SQLException ex) {
+            } catch (SQLException | NoSuchAlgorithmException | UnsupportedEncodingException ex) {
                 Logger.getLogger(CadastroUsuario.class.getName()).log(Level.SEVERE, null, ex);
             }
         } catch (EmailException | MalformedURLException ex) {

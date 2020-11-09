@@ -17,7 +17,7 @@ public class UsuarioController {
         UsuarioBean user = (UsuarioBean) use;
         return new UsuarioDao().busca(user);
     }
-    public boolean cadastrar(Object use) throws SQLException{
+    public boolean cadastrar(Object use) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException{
         return new UsuarioDao().salvar(use);
     }
 }

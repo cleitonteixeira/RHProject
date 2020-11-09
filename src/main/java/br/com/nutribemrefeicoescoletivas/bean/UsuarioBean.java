@@ -63,6 +63,5 @@ public class UsuarioBean {
     public void setAtivo(String Ativo) {
         this.Ativo = Ativo;
     }
-    
-    
+
 }

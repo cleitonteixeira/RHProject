@@ -25,8 +25,8 @@ public class UsuarioDao extends Conn{
         try{
             stmt = con.prepareStatement(sql);
             stmt.setString(1, user.getNome());
-            stmt.setString(2, user.getLogin());
-            stmt.setString(3, user.getEmail());
+            stmt.setString(2, user.getEmail());
+            stmt.setString(3, user.getLogin());
             stmt.setString(4, new Criptografia().criptografa(user.getSenha()));
             stmt.execute();
             rt = true;
@@ -36,6 +36,7 @@ public class UsuarioDao extends Conn{
             rt = false;
             //JOptionPane.showMessageDialog(null, "Erro ao cadastrar!");
         }finally{
+            res.close();
             stmt.close();
             con.close();
         }
@@ -59,14 +60,17 @@ public class UsuarioDao extends Conn{
             JOptionPane.showMessageDialog(null, "Atualizado com sucesso!");
         }catch(SQLException e){
             JOptionPane.showMessageDialog(null, "Erro ao atualizar!");
+        }finally{
+            res.close();
+            stmt.close();
+            con.close();
         }
-        con.close();
     }
     public boolean logar (Object usernc) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException{
         UsuarioBean user = (UsuarioBean) usernc;
         boolean retorno;
         sql = "SELECT * FROM Usuario WHERE login = ?;";
-        System.out.println("SELECT * FROM Usuario WHERE login ="+user.getLogin());
+        System.out.println("SELECT * FROM Usuario WHERE login = "+user.getLogin());
         try {
             con = Conn.getConexao();
         }catch(SQLException xp){
@@ -98,10 +102,11 @@ public class UsuarioDao extends Conn{
             }
         } catch (SQLException e) {
             retorno = false;
+        }finally{
+            res.close();
+            stmt.close();
+            con.close();
         }
-        res.close();
-        stmt.close();
-        con.close();
         return retorno;
     }
     public Object busca (UsuarioBean usernc) throws SQLException{
@@ -123,64 +128,89 @@ public class UsuarioDao extends Conn{
             }
         } catch (Exception e) {
             Logger.getLogger(UsuarioDao.class.getName()).log(Level.SEVERE, null, e);
+        }finally{
+            res.close();
+            stmt.close();
+            con.close();
         }
-        res.close();
-        stmt.close();
-        con.close();
         return usernci;
     }
     public List<UsuarioBean> lista () throws SQLException{
-        con = Conn.getConexao();
-        sql = "SELECT * FROM Usuario";
-        stmt = con.prepareStatement(sql);
-        res = stmt.executeQuery();
         List<UsuarioBean> ListaUsuario = new ArrayList <>();
-        while(res.next()){
-            UsuarioBean fBean = new UsuarioBean();
-            fBean.setID(res.getInt("idUsuario"));
-            fBean.setNome(res.getString("Nome"));
-            ListaUsuario.add(fBean);
+        try {
+            con = Conn.getConexao();
+        }catch(SQLException xp){
+            Logger.getLogger(UsuarioDao.class.getName()).log(Level.SEVERE, null, xp);
         }
-        res.close();
-        stmt.close();
-        con.close();
+        try{
+            sql = "SELECT * FROM Usuario";
+            stmt = con.prepareStatement(sql);
+            res = stmt.executeQuery();
+            while(res.next()){
+                UsuarioBean fBean = new UsuarioBean();
+                fBean.setID(res.getInt("idUsuario"));
+                fBean.setNome(res.getString("Nome"));
+                ListaUsuario.add(fBean);
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }finally{
+            res.close();
+            stmt.close();
+            con.close();
+        }
        return ListaUsuario;
     }
     public List<UsuarioBean> consultaRefinada (String Nome) throws SQLException{
-        con = Conn.getConexao();
-
-        sql = "SELECT * FROM Usuario WHERE Nome LIKE ?";
-        stmt = con.prepareStatement(sql);
-        stmt.setString(1, '%' + Nome + '%');
-        res = stmt.executeQuery();
         List<UsuarioBean> ListaUsuario = new ArrayList <>();
-        while(res.next()){
-            UsuarioBean fBean = new UsuarioBean();
-            fBean.setID(res.getInt("idUsuario"));
-            fBean.setNome(res.getString("Nome"));
-            ListaUsuario.add(fBean);
+
+        try {
+            con = Conn.getConexao();
+        }catch(SQLException xp){
+            Logger.getLogger(UsuarioDao.class.getName()).log(Level.SEVERE, null, xp);
         }
-        res.close();
-        stmt.close();
-        con.close();
+        try {
+            sql = "SELECT * FROM Usuario WHERE Nome LIKE ?";
+            stmt = con.prepareStatement(sql);
+            stmt.setString(1, '%' + Nome + '%');
+            res = stmt.executeQuery();
+            while(res.next()){
+                UsuarioBean fBean = new UsuarioBean();
+                fBean.setID(res.getInt("idUsuario"));
+                fBean.setNome(res.getString("Nome"));
+                ListaUsuario.add(fBean);
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }finally{
+            res.close();
+            stmt.close();
+            con.close();
+        }
         return ListaUsuario;
     }
     public int ReturnId() throws SQLException{
-        sql = "SELECT MAX(idUsuario) FROM Usuario";
+        int cod = 0;
         try {
             con =  Conn.getConexao();
         }catch(SQLException xp){
             Logger.getLogger(UsuarioDao.class.getName()).log(Level.SEVERE, null, xp);
         }
-        stmt = con.prepareStatement(sql);
-        res = stmt.executeQuery();
-        int cod = 0;
-        if(res.next()){
-            cod = res.getInt("MAX(idUsuario)");
+        try{
+            sql = "SELECT MAX(idUsuario) AS idUsuario FROM Usuario";
+
+            stmt = con.prepareStatement(sql);
+            res = stmt.executeQuery();
+            if(res.next()){
+                cod = res.getInt("idUsuario");
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }finally{
+            res.close();
+            stmt.close();
+            con.close();
         }
-        res.close();
-        stmt.close();        
-        con.close();
         return cod;
         
     }
