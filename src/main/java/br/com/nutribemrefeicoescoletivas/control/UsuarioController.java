@@ -20,4 +20,7 @@ public class UsuarioController {
     public boolean cadastrar(Object use) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException{
         return new UsuarioDao().salvar(use);
     }
+    public Object verificarPermissao(Object use) throws SQLException{
+        return new UsuarioDao().BuscaPermissao(use);
+    }
 }

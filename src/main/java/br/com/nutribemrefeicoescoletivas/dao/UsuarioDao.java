@@ -1,5 +1,6 @@
 package br.com.nutribemrefeicoescoletivas.dao;
 
+import br.com.nutribemrefeicoescoletivas.bean.PermissaoBean;
 import br.com.nutribemrefeicoescoletivas.bean.UsuarioBean;
 import br.com.nutribemrefeicoescoletivas.connection.Conn;
 import br.com.nutribemrefeicoescoletivas.tools.Criptografia;
@@ -212,6 +213,35 @@ public class UsuarioDao extends Conn{
             con.close();
         }
         return cod;
-        
+    }
+
+    public Object BuscaPermissao(Object user) throws SQLException {
+        UsuarioBean uPer = (UsuarioBean) user;
+        PermissaoBean per = new PermissaoBean();
+        sql = "SELECT * FROM permissao WHERE Usuario_idUsuario = ?";
+        try {
+            con = Conn.getConexao();
+        }catch(SQLException xp){
+            Logger.getLogger(UsuarioDao.class.getName()).log(Level.SEVERE, null, xp);
+        }
+        System.out.println(uPer.getID());
+        try {
+            stmt = con.prepareStatement(sql);
+            stmt.setInt(1, uPer.getID());
+            res = stmt.executeQuery();
+            if(res.next()){
+                per.setFerias(res.getString("Ferias"));
+                per.setAdmissao(res.getString("Admissao"));
+                per.setDemissao(res.getString("Demissao"));
+                per.setPromocao(res.getString("Promocao"));
+            }
+        } catch (Exception e) {
+            Logger.getLogger(UsuarioDao.class.getName()).log(Level.SEVERE, null, e);
+        }finally{
+            res.close();
+            stmt.close();
+            con.close();
+        }
+        return per;
     }
 }

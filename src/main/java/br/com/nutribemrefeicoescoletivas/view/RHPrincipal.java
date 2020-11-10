@@ -1,5 +1,6 @@
 package br.com.nutribemrefeicoescoletivas.view;
 
+import br.com.nutribemrefeicoescoletivas.bean.PermissaoBean;
 import br.com.nutribemrefeicoescoletivas.bean.UsuarioBean;
 import br.com.nutribemrefeicoescoletivas.control.UsuarioController;
 import java.sql.SQLException;
@@ -10,7 +11,7 @@ public class RHPrincipal extends javax.swing.JFrame {
 
     private UsuarioBean user = null;
     
-    public RHPrincipal() {
+    public RHPrincipal() throws SQLException {
         initComponents();
         setExtendedState(MAXIMIZED_BOTH);
         this.setLocationRelativeTo(this);
@@ -21,6 +22,33 @@ public class RHPrincipal extends javax.swing.JFrame {
         UsuarioBean obj = (UsuarioBean) ob;
         user = (UsuarioBean) new UsuarioController().busca(obj);
         Saudacao.setText("Bem vindo "+user.getNome()+"!");
+        
+        PermissaoBean pb = (PermissaoBean) new UsuarioController().verificarPermissao(user);
+        System.out.println(obj.getID());
+
+        System.out.println(pb.getFerias());
+        switch (pb.getFerias()){
+            case "APR":
+                SoFerias.setEnabled(true);
+                ApFerias.setEnabled(true);
+                AcFerias.setEnabled(true);
+                break;
+            case "SOL":
+                SoFerias.setEnabled(true);
+                ApFerias.setEnabled(false);
+                AcFerias.setEnabled(true);
+                break;
+            case "ACO":
+                SoFerias.setEnabled(false);
+                ApFerias.setEnabled(false);
+                AcFerias.setEnabled(true);
+                break;
+            default:
+                SoFerias.setEnabled(false);
+                ApFerias.setEnabled(false);
+                AcFerias.setEnabled(false);
+                break;
+        }
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -42,9 +70,9 @@ public class RHPrincipal extends javax.swing.JFrame {
         CadastroUser = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
+        SoFerias = new javax.swing.JMenuItem();
+        ApFerias = new javax.swing.JMenuItem();
+        AcFerias = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
@@ -113,19 +141,19 @@ public class RHPrincipal extends javax.swing.JFrame {
 
         jMenu2.setText("Férias");
 
-        jMenuItem1.setText("Solicitar");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        SoFerias.setText("Solicitar");
+        SoFerias.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                SoFeriasActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem1);
+        jMenu2.add(SoFerias);
 
-        jMenuItem2.setText("Aprovar");
-        jMenu2.add(jMenuItem2);
+        ApFerias.setText("Aprovar");
+        jMenu2.add(ApFerias);
 
-        jMenuItem3.setText("Acompanhar");
-        jMenu2.add(jMenuItem3);
+        AcFerias.setText("Acompanhar");
+        jMenu2.add(AcFerias);
 
         jMenu1.add(jMenu2);
 
@@ -233,9 +261,15 @@ public class RHPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_FuncCadastroActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    private void SoFeriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SoFeriasActionPerformed
+        try{
+            FormularioFerias ff = new FormularioFerias(this, true);
+            ff.getInfor(user.getID(), this);
+            ff.setVisible(true);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_SoFeriasActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         // TODO add your handling code here:
@@ -279,11 +313,17 @@ public class RHPrincipal extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            new RHPrincipal().setVisible(true);
+            try {
+                new RHPrincipal().setVisible(true);
+            } catch (SQLException ex) {
+                Logger.getLogger(RHPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem AcFerias;
+    private javax.swing.JMenuItem ApFerias;
     private javax.swing.JMenu BTArquivos;
     private javax.swing.JMenu BTUsuarios;
     private javax.swing.JMenu BTUsuarios1;
@@ -292,18 +332,16 @@ public class RHPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem FileUp;
     private javax.swing.JMenuItem FuncCadastro;
     private javax.swing.JLabel Saudacao;
+    private javax.swing.JMenuItem SoFerias;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem12;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
