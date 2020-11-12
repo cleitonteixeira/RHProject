@@ -37,11 +37,9 @@ public class UsuarioDao extends Conn{
             rt = false;
             //JOptionPane.showMessageDialog(null, "Erro ao cadastrar!");
         }finally{
-            res.close();
             stmt.close();
             con.close();
         }
-        
         return rt;
     }
     public void atualiza(Object usernc) throws SQLException{
@@ -214,7 +212,33 @@ public class UsuarioDao extends Conn{
         }
         return cod;
     }
-
+    public boolean CadastraPermissao(Object obj) throws SQLException{
+        boolean rt = false;
+        PermissaoBean per = (PermissaoBean) obj;
+        try {
+            con = Conn.getConexao();
+        }catch(SQLException xp){
+            Logger.getLogger(UsuarioDao.class.getName()).log(Level.SEVERE, null, xp);
+        }
+        try {
+            sql = "INSERT INTO permissao (Usuario_idUsuario, Ferias, Demissao, Promocao, Admissao) VALUES ( ?, ?, ?, ?, ? )";
+            stmt = con.prepareStatement(sql);
+            stmt.setInt(1, per.getIDUsuario());
+            stmt.setString(2, per.getFerias());
+            stmt.setString(3, per.getDemissao());
+            stmt.setString(4, per.getPromocao());
+            stmt.setString(5, per.getAdmissao());
+            stmt.execute();
+            rt = true;
+        } catch (Exception e) {
+            rt = false;
+            Logger.getLogger(UsuarioDao.class.getName()).log(Level.SEVERE, null, e);
+        }finally{
+            stmt.close();
+            con.close();
+        }
+        return rt;
+    }
     public Object BuscaPermissao(Object user) throws SQLException {
         UsuarioBean uPer = (UsuarioBean) user;
         PermissaoBean per = new PermissaoBean();
@@ -224,7 +248,6 @@ public class UsuarioDao extends Conn{
         }catch(SQLException xp){
             Logger.getLogger(UsuarioDao.class.getName()).log(Level.SEVERE, null, xp);
         }
-        System.out.println(uPer.getID());
         try {
             stmt = con.prepareStatement(sql);
             stmt.setInt(1, uPer.getID());

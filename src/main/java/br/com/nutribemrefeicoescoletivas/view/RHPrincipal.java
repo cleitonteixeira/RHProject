@@ -24,9 +24,8 @@ public class RHPrincipal extends javax.swing.JFrame {
         Saudacao.setText("Bem vindo "+user.getNome()+"!");
         
         PermissaoBean pb = (PermissaoBean) new UsuarioController().verificarPermissao(user);
-        System.out.println(obj.getID());
-
-        System.out.println(pb.getFerias());
+        
+        /*Libera os Campos*/
         switch (pb.getFerias()){
             case "APR":
                 SoFerias.setEnabled(true);
@@ -49,6 +48,74 @@ public class RHPrincipal extends javax.swing.JFrame {
                 AcFerias.setEnabled(false);
                 break;
         }
+        switch (pb.getAdmissao()){
+            case "APR":
+                SoAdmissao.setEnabled(true);
+                ApAdmissao.setEnabled(true);
+                AcAdmissao.setEnabled(true);
+                break;
+            case "SOL":
+                SoAdmissao.setEnabled(true);
+                ApAdmissao.setEnabled(false);
+                AcAdmissao.setEnabled(true);
+                break;
+            case "ACO":
+                SoAdmissao.setEnabled(false);
+                ApAdmissao.setEnabled(false);
+                AcAdmissao.setEnabled(true);
+                break;
+            default:
+                SoAdmissao.setEnabled(false);
+                ApAdmissao.setEnabled(false);
+                AcAdmissao.setEnabled(false);
+                break;
+        }
+        switch (pb.getDemissao()){
+            case "APR":
+                SoDemissao.setEnabled(true);
+                ApDemissao.setEnabled(true);
+                AcDemissao.setEnabled(true);
+                break;
+            case "SOL":
+                SoDemissao.setEnabled(true);
+                ApDemissao.setEnabled(false);
+                AcDemissao.setEnabled(true);
+                break;
+            case "ACO":
+                SoDemissao.setEnabled(false);
+                ApDemissao.setEnabled(false);
+                AcDemissao.setEnabled(true);
+                break;
+            default:
+                SoDemissao.setEnabled(false);
+                ApDemissao.setEnabled(false);
+                AcDemissao.setEnabled(false);
+                break;
+        }
+        switch (pb.getPromocao()){
+            case "APR":
+                SoPromocao.setEnabled(true);
+                ApPromocao.setEnabled(true);
+                AcPromocao.setEnabled(true);
+                break;
+            case "SOL":
+                SoPromocao.setEnabled(true);
+                ApPromocao.setEnabled(false);
+                AcPromocao.setEnabled(true);
+                break;
+            case "ACO":
+                SoPromocao.setEnabled(false);
+                ApPromocao.setEnabled(false);
+                AcPromocao.setEnabled(true);
+                break;
+            default:
+                SoPromocao.setEnabled(false);
+                ApPromocao.setEnabled(false);
+                AcPromocao.setEnabled(false);
+                break;
+        }
+        /*Fim Libera os Campos*/
+
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -74,17 +141,17 @@ public class RHPrincipal extends javax.swing.JFrame {
         ApFerias = new javax.swing.JMenuItem();
         AcFerias = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        jMenuItem5 = new javax.swing.JMenuItem();
-        jMenuItem6 = new javax.swing.JMenuItem();
+        SoAdmissao = new javax.swing.JMenuItem();
+        ApAdmissao = new javax.swing.JMenuItem();
+        AcAdmissao = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
-        jMenuItem7 = new javax.swing.JMenuItem();
-        jMenuItem8 = new javax.swing.JMenuItem();
-        jMenuItem9 = new javax.swing.JMenuItem();
+        SoDemissao = new javax.swing.JMenuItem();
+        ApDemissao = new javax.swing.JMenuItem();
+        AcDemissao = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
-        jMenuItem10 = new javax.swing.JMenuItem();
-        jMenuItem11 = new javax.swing.JMenuItem();
-        jMenuItem12 = new javax.swing.JMenuItem();
+        SoPromocao = new javax.swing.JMenuItem();
+        ApPromocao = new javax.swing.JMenuItem();
+        AcPromocao = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("RH-Online");
@@ -159,55 +226,55 @@ public class RHPrincipal extends javax.swing.JFrame {
 
         jMenu3.setText("Admissão");
 
-        jMenuItem4.setText("Solicitar");
-        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+        SoAdmissao.setText("Solicitar");
+        SoAdmissao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem4ActionPerformed(evt);
+                SoAdmissaoActionPerformed(evt);
             }
         });
-        jMenu3.add(jMenuItem4);
+        jMenu3.add(SoAdmissao);
 
-        jMenuItem5.setText("Aprovar");
-        jMenu3.add(jMenuItem5);
+        ApAdmissao.setText("Aprovar");
+        jMenu3.add(ApAdmissao);
 
-        jMenuItem6.setText("Acompanhar");
-        jMenu3.add(jMenuItem6);
+        AcAdmissao.setText("Acompanhar");
+        jMenu3.add(AcAdmissao);
 
         jMenu1.add(jMenu3);
 
         jMenu4.setText("Demissão");
 
-        jMenuItem7.setText("Solicitar");
-        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+        SoDemissao.setText("Solicitar");
+        SoDemissao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem7ActionPerformed(evt);
+                SoDemissaoActionPerformed(evt);
             }
         });
-        jMenu4.add(jMenuItem7);
+        jMenu4.add(SoDemissao);
 
-        jMenuItem8.setText("Aprovar");
-        jMenu4.add(jMenuItem8);
+        ApDemissao.setText("Aprovar");
+        jMenu4.add(ApDemissao);
 
-        jMenuItem9.setText("Acompanhar");
-        jMenu4.add(jMenuItem9);
+        AcDemissao.setText("Acompanhar");
+        jMenu4.add(AcDemissao);
 
         jMenu1.add(jMenu4);
 
         jMenu5.setText("Promoção");
 
-        jMenuItem10.setText("Solicitar");
-        jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
+        SoPromocao.setText("Solicitar");
+        SoPromocao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem10ActionPerformed(evt);
+                SoPromocaoActionPerformed(evt);
             }
         });
-        jMenu5.add(jMenuItem10);
+        jMenu5.add(SoPromocao);
 
-        jMenuItem11.setText("Aprovar");
-        jMenu5.add(jMenuItem11);
+        ApPromocao.setText("Aprovar");
+        jMenu5.add(ApPromocao);
 
-        jMenuItem12.setText("Acompanhar");
-        jMenu5.add(jMenuItem12);
+        AcPromocao.setText("Acompanhar");
+        jMenu5.add(AcPromocao);
 
         jMenu1.add(jMenu5);
 
@@ -271,17 +338,17 @@ public class RHPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_SoFeriasActionPerformed
 
-    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+    private void SoAdmissaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SoAdmissaoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem4ActionPerformed
+    }//GEN-LAST:event_SoAdmissaoActionPerformed
 
-    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+    private void SoDemissaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SoDemissaoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem7ActionPerformed
+    }//GEN-LAST:event_SoDemissaoActionPerformed
 
-    private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
+    private void SoPromocaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SoPromocaoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem10ActionPerformed
+    }//GEN-LAST:event_SoPromocaoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -322,8 +389,14 @@ public class RHPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem AcAdmissao;
+    private javax.swing.JMenuItem AcDemissao;
     private javax.swing.JMenuItem AcFerias;
+    private javax.swing.JMenuItem AcPromocao;
+    private javax.swing.JMenuItem ApAdmissao;
+    private javax.swing.JMenuItem ApDemissao;
     private javax.swing.JMenuItem ApFerias;
+    private javax.swing.JMenuItem ApPromocao;
     private javax.swing.JMenu BTArquivos;
     private javax.swing.JMenu BTUsuarios;
     private javax.swing.JMenu BTUsuarios1;
@@ -332,21 +405,15 @@ public class RHPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem FileUp;
     private javax.swing.JMenuItem FuncCadastro;
     private javax.swing.JLabel Saudacao;
+    private javax.swing.JMenuItem SoAdmissao;
+    private javax.swing.JMenuItem SoDemissao;
     private javax.swing.JMenuItem SoFerias;
+    private javax.swing.JMenuItem SoPromocao;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem10;
-    private javax.swing.JMenuItem jMenuItem11;
-    private javax.swing.JMenuItem jMenuItem12;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JMenuItem jMenuItem7;
-    private javax.swing.JMenuItem jMenuItem8;
-    private javax.swing.JMenuItem jMenuItem9;
     // End of variables declaration//GEN-END:variables
 }

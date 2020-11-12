@@ -1,5 +1,6 @@
 package br.com.nutribemrefeicoescoletivas.view;
 
+import br.com.nutribemrefeicoescoletivas.bean.PermissaoBean;
 import br.com.nutribemrefeicoescoletivas.bean.UsuarioBean;
 import br.com.nutribemrefeicoescoletivas.control.UsuarioController;
 import br.com.nutribemrefeicoescoletivas.mail.ConfigMail;
@@ -244,7 +245,7 @@ public class CadastroUsuario extends javax.swing.JDialog {
                         .addComponent(ApAdmissao)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(AcAdmissao)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
                 .addComponent(BTSalvar)
                 .addContainerGap())
         );
@@ -254,13 +255,61 @@ public class CadastroUsuario extends javax.swing.JDialog {
 
     private void BTSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTSalvarActionPerformed
         UsuarioBean ub = new UsuarioBean();
+        PermissaoBean pb = new PermissaoBean();
         try {
             ub.setLogin(CpLogin.getText());
             ub.setEmail(CpEmail.getText());
             ub.setNome(CpNome.getText());
             ub.setSenha(gerarString());
+            
+            /*GET DAS PERMISSÕES*/
+            if(ApFerias.isSelected()){
+                pb.setFerias("APR");
+            }else{
+                if(!ApFerias.isSelected() && SoFerias.isSelected()){
+                    pb.setFerias("SOL");
+                }else{
+                    if(!SoFerias.isSelected() && AcFerias.isSelected()){
+                        pb.setFerias("ACO");
+                    }
+                }
+            }
+            if(ApDemissao.isSelected()){
+                pb.setDemissao("APR");
+            }else{
+                if(!ApDemissao.isSelected() && SoDemissao.isSelected()){
+                    pb.setDemissao("SOL");
+                }else{
+                    if(!SoDemissao.isSelected() && AcDemissao.isSelected()){
+                        pb.setDemissao("ACO");
+                    }
+                }
+            }
+            if(ApPromocao.isSelected()){
+                pb.setPromocao("APR");
+            }else{
+                if(!ApPromocao.isSelected() && SoPromocao.isSelected()){
+                    pb.setPromocao("SOL");
+                }else{
+                    if(!SoPromocao.isSelected() && AcPromocao.isSelected()){
+                        pb.setPromocao("ACO");
+                    }
+                }
+            }
+            if(ApAdmissao.isSelected()){
+                pb.setAdmissao("APR");
+            }else{
+                if(!ApAdmissao.isSelected() && SoAdmissao.isSelected()){
+                    pb.setAdmissao("SOL");
+                }else{
+                    if(!SoAdmissao.isSelected() && AcAdmissao.isSelected()){
+                        pb.setAdmissao("ACO");
+                    }
+                }
+            }
+            /*FIM*/
             try {
-                if(new UsuarioController().cadastrar(ub)){
+                if(new UsuarioController().cadastrar( ub, pb )){
                     if(new ConfigMail().enviaEmailFormatoHtml( ub )){
                         JOptionPane.showMessageDialog(this, "Usuário Cadastrado e e-mail enviado.");
                     }else{

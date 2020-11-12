@@ -104,20 +104,20 @@
                 <Property name="text" type="java.lang.String" value="Admiss&#xe3;o"/>
               </Properties>
               <SubComponents>
-                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem4">
+                <MenuItem class="javax.swing.JMenuItem" name="SoAdmissao">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Solicitar"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem4ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="SoAdmissaoActionPerformed"/>
                   </Events>
                 </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem5">
+                <MenuItem class="javax.swing.JMenuItem" name="ApAdmissao">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Aprovar"/>
                   </Properties>
                 </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem6">
+                <MenuItem class="javax.swing.JMenuItem" name="AcAdmissao">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Acompanhar"/>
                   </Properties>
@@ -129,20 +129,20 @@
                 <Property name="text" type="java.lang.String" value="Demiss&#xe3;o"/>
               </Properties>
               <SubComponents>
-                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem7">
+                <MenuItem class="javax.swing.JMenuItem" name="SoDemissao">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Solicitar"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem7ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="SoDemissaoActionPerformed"/>
                   </Events>
                 </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem8">
+                <MenuItem class="javax.swing.JMenuItem" name="ApDemissao">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Aprovar"/>
                   </Properties>
                 </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem9">
+                <MenuItem class="javax.swing.JMenuItem" name="AcDemissao">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Acompanhar"/>
                   </Properties>
@@ -154,20 +154,20 @@
                 <Property name="text" type="java.lang.String" value="Promo&#xe7;&#xe3;o"/>
               </Properties>
               <SubComponents>
-                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem10">
+                <MenuItem class="javax.swing.JMenuItem" name="SoPromocao">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Solicitar"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem10ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="SoPromocaoActionPerformed"/>
                   </Events>
                 </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem11">
+                <MenuItem class="javax.swing.JMenuItem" name="ApPromocao">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Aprovar"/>
                   </Properties>
                 </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem12">
+                <MenuItem class="javax.swing.JMenuItem" name="AcPromocao">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Acompanhar"/>
                   </Properties>
