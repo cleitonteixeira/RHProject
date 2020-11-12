@@ -197,7 +197,6 @@ public class UsuarioDao extends Conn{
         }
         try{
             sql = "SELECT MAX(idUsuario) AS idUsuario FROM Usuario";
-
             stmt = con.prepareStatement(sql);
             res = stmt.executeQuery();
             if(res.next()){
