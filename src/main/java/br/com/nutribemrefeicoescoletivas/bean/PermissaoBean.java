@@ -3,18 +3,19 @@ package br.com.nutribemrefeicoescoletivas.bean;
 
 public class PermissaoBean {
     private int ID, IDUsuario;
-    private String Ferias, Demissao, Promocao, Admissao;
+    private String Ferias, Demissao, Promocao, Admissao, NvAcesso;
 
     public PermissaoBean() {
     }
 
-    public PermissaoBean(int ID, int IDUsuario, String Ferias, String Demissao, String Promocao, String Admissao) {
+    public PermissaoBean(int ID, int IDUsuario, String Ferias, String Demissao, String Promocao, String Admissao, String NvAcesso) {
         this.ID = ID;
         this.IDUsuario = IDUsuario;
         this.Ferias = Ferias;
         this.Demissao = Demissao;
         this.Promocao = Promocao;
         this.Admissao = Admissao;
+        this.NvAcesso = NvAcesso;
     }
 
     public int getID() {
@@ -63,6 +64,14 @@ public class PermissaoBean {
 
     public void setAdmissao(String Admissao) {
         this.Admissao = Admissao;
+    }
+    
+    public String getNvAcesso() {
+        return NvAcesso;
+    }
+
+    public void setNvAcesso(String NvAcesso) {
+        this.NvAcesso = NvAcesso;
     }
     
 }

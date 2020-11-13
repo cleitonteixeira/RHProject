@@ -27,7 +27,26 @@ public class CadastroUsuario extends javax.swing.JDialog {
         setLocationRelativeTo(this);
     }
     
-    
+    private void LimpaCampos(){
+        NaADM.setSelected(false);
+        NaRH.setSelected(false);
+        NaUP.setSelected(false);
+        SoAdmissao.setSelected(false);
+        SoDemissao.setSelected(false);
+        SoFerias.setSelected(false);
+        SoPromocao.setSelected(false);
+        ApAdmissao.setSelected(false);
+        ApDemissao.setSelected(false);
+        ApFerias.setSelected(false);
+        ApPromocao.setSelected(false);
+        AcAdmissao.setSelected(false);
+        AcDemissao.setSelected(false);
+        AcFerias.setSelected(false);
+        AcPromocao.setSelected(false);
+        CpEmail.setText("");
+        CpLogin.setText("");
+        CpNome.setText("");
+    }
     
     public String gerarString() {
         String letras = "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvXxYyWwZz123456789";
@@ -74,6 +93,11 @@ public class CadastroUsuario extends javax.swing.JDialog {
         SoAdmissao = new javax.swing.JCheckBox();
         jLabel12 = new javax.swing.JLabel();
         BTSalvar = new javax.swing.JButton();
+        jSeparator2 = new javax.swing.JSeparator();
+        jLabel10 = new javax.swing.JLabel();
+        NaADM = new javax.swing.JRadioButton();
+        NaRH = new javax.swing.JRadioButton();
+        NaUP = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -95,41 +119,93 @@ public class CadastroUsuario extends javax.swing.JDialog {
 
         CpEmail.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
-        jLabel7.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel7.setText("Lista de Permissões");
 
+        SoFerias.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         SoFerias.setText("Solicitar");
+        SoFerias.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                SoFeriasMouseClicked(evt);
+            }
+        });
 
+        ApFerias.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         ApFerias.setText("Aprovar");
+        ApFerias.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ApFeriasMouseClicked(evt);
+            }
+        });
 
+        AcFerias.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         AcFerias.setText("Acompanhar");
 
         jLabel8.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel8.setText("Férias");
 
+        SoDemissao.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         SoDemissao.setText("Solicitar");
+        SoDemissao.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                SoDemissaoMouseClicked(evt);
+            }
+        });
 
+        ApDemissao.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         ApDemissao.setText("Aprovar");
+        ApDemissao.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ApDemissaoMouseClicked(evt);
+            }
+        });
 
+        AcDemissao.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         AcDemissao.setText("Acompanhar");
 
         jLabel9.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel9.setText("Demissão");
 
+        AcPromocao.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         AcPromocao.setText("Acompanhar");
 
+        ApPromocao.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         ApPromocao.setText("Aprovar");
+        ApPromocao.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ApPromocaoMouseClicked(evt);
+            }
+        });
 
+        SoPromocao.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         SoPromocao.setText("Solicitar");
+        SoPromocao.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                SoPromocaoMouseClicked(evt);
+            }
+        });
 
         jLabel11.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel11.setText("Promoção");
 
+        AcAdmissao.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         AcAdmissao.setText("Acompanhar");
 
+        ApAdmissao.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         ApAdmissao.setText("Aprovar");
+        ApAdmissao.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ApAdmissaoMouseClicked(evt);
+            }
+        });
 
+        SoAdmissao.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         SoAdmissao.setText("Solicitar");
+        SoAdmissao.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                SoAdmissaoMouseClicked(evt);
+            }
+        });
 
         jLabel12.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel12.setText("Admissão");
@@ -141,11 +217,39 @@ public class CadastroUsuario extends javax.swing.JDialog {
             }
         });
 
+        jLabel10.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel10.setText("Nível de Acesso");
+
+        NaADM.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        NaADM.setText("Administrador");
+        NaADM.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                NaADMMouseClicked(evt);
+            }
+        });
+
+        NaRH.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        NaRH.setText("RH");
+        NaRH.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                NaRHMouseClicked(evt);
+            }
+        });
+
+        NaUP.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        NaUP.setText("Usuário Padrão");
+        NaUP.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                NaUPMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jSeparator1)
+            .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -161,32 +265,39 @@ public class CadastroUsuario extends javax.swing.JDialog {
                             .addComponent(CpLogin)
                             .addComponent(CpEmail)))
                     .addComponent(jLabel7)
+                    .addComponent(BTSalvar)
+                    .addComponent(ApFerias)
+                    .addComponent(jLabel8)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(NaADM)
+                        .addGap(18, 18, 18)
+                        .addComponent(NaRH)
+                        .addGap(18, 18, 18)
+                        .addComponent(NaUP))
+                    .addComponent(jLabel10)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(AcFerias)
-                            .addComponent(ApFerias)
-                            .addComponent(SoFerias)
-                            .addComponent(jLabel8))
+                            .addComponent(SoFerias))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(AcDemissao)
                             .addComponent(ApDemissao)
+                            .addComponent(jLabel9)
                             .addComponent(SoDemissao)
-                            .addComponent(jLabel9))
+                            .addComponent(AcDemissao))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(AcPromocao)
                             .addComponent(ApPromocao)
+                            .addComponent(jLabel11)
                             .addComponent(SoPromocao)
-                            .addComponent(jLabel11))
+                            .addComponent(AcPromocao))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(AcAdmissao)
-                            .addComponent(ApAdmissao)
                             .addComponent(SoAdmissao)
-                            .addComponent(jLabel12)))
-                    .addComponent(BTSalvar))
-                .addContainerGap(75, Short.MAX_VALUE))
+                            .addComponent(ApAdmissao)
+                            .addComponent(jLabel12)
+                            .addComponent(AcAdmissao))))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -211,41 +322,50 @@ public class CadastroUsuario extends javax.swing.JDialog {
                 .addComponent(jLabel7)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel9))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(SoFerias)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(ApFerias)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(AcFerias))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(SoDemissao)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(ApDemissao)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(AcDemissao))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel8)
+                        .addGap(7, 7, 7)
+                        .addComponent(ApFerias))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel9)
+                        .addGap(7, 7, 7)
+                        .addComponent(ApDemissao))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel11)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(SoPromocao)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(ApPromocao)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(AcPromocao))
+                        .addGap(7, 7, 7)
+                        .addComponent(ApPromocao))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel12)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(7, 7, 7)
+                        .addComponent(ApAdmissao)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(SoFerias)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(AcFerias))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(SoDemissao)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(AcDemissao))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(SoPromocao)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(AcPromocao))
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(SoAdmissao)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(ApAdmissao)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(AcAdmissao)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                .addGap(10, 10, 10)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel10)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(NaADM)
+                    .addComponent(NaRH)
+                    .addComponent(NaUP))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addComponent(BTSalvar)
                 .addContainerGap())
         );
@@ -307,13 +427,30 @@ public class CadastroUsuario extends javax.swing.JDialog {
                     }
                 }
             }
+            
+            if(NaADM.isSelected()){
+                pb.setNvAcesso("ADM");
+            }else{
+                if(NaRH.isSelected()){
+                    pb.setNvAcesso("RH");
+                }else{
+                    if(NaUP.isSelected()){
+                        pb.setNvAcesso("UP");
+                    }else{
+                        pb.setNvAcesso("UP");
+                    }
+                }
+            }
+            System.out.println(pb.getNvAcesso());
             /*FIM*/
             try {
                 if(new UsuarioController().cadastrar( ub, pb )){
                     if(new ConfigMail().enviaEmailFormatoHtml( ub )){
                         JOptionPane.showMessageDialog(this, "Usuário Cadastrado e e-mail enviado.");
+                        LimpaCampos();
                     }else{
                         JOptionPane.showMessageDialog(this, "Usuário Cadastrado e e-mail não enviado.");
+                        LimpaCampos();
                     }
                 }else{
                     JOptionPane.showMessageDialog(this, "Falha ao cadastrar Usuário.");
@@ -325,6 +462,123 @@ public class CadastroUsuario extends javax.swing.JDialog {
             Logger.getLogger(CadastroUsuario.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_BTSalvarActionPerformed
+
+    private void SoFeriasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SoFeriasMouseClicked
+        if(SoFerias.isSelected()){
+            AcFerias.setSelected(true);
+            AcFerias.setEnabled(false);
+        }else{
+            AcFerias.setSelected(false);
+            AcFerias.setEnabled(true);
+        }
+    }//GEN-LAST:event_SoFeriasMouseClicked
+
+    private void ApFeriasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ApFeriasMouseClicked
+        if(ApFerias.isSelected()){
+            AcFerias.setSelected(true);
+            AcFerias.setEnabled(false);
+            SoFerias.setSelected(true);
+            SoFerias.setEnabled(false);
+        }else{
+            AcFerias.setSelected(false);
+            AcFerias.setEnabled(true);
+            SoFerias.setSelected(false);
+            SoFerias.setEnabled(true);
+        }
+    }//GEN-LAST:event_ApFeriasMouseClicked
+
+    private void SoDemissaoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SoDemissaoMouseClicked
+        if(SoDemissao.isSelected()){
+            AcDemissao.setSelected(true);
+            AcDemissao.setEnabled(false);
+        }else{
+            AcDemissao.setSelected(false);
+            AcDemissao.setEnabled(true);
+        }
+    }//GEN-LAST:event_SoDemissaoMouseClicked
+
+    private void SoPromocaoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SoPromocaoMouseClicked
+        if(SoPromocao.isSelected()){
+            AcPromocao.setSelected(true);
+            AcPromocao.setEnabled(false);
+        }else{
+            AcPromocao.setSelected(false);
+            AcPromocao.setEnabled(true);
+        }
+    }//GEN-LAST:event_SoPromocaoMouseClicked
+
+    private void ApPromocaoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ApPromocaoMouseClicked
+        if(ApPromocao.isSelected()){
+            AcPromocao.setSelected(true);
+            AcPromocao.setEnabled(false);
+            SoPromocao.setSelected(true);
+            SoPromocao.setEnabled(false);
+        }else{
+            AcPromocao.setSelected(false);
+            AcPromocao.setEnabled(true);
+            SoPromocao.setSelected(false);
+            SoPromocao.setEnabled(true);
+        }
+    }//GEN-LAST:event_ApPromocaoMouseClicked
+
+    private void SoAdmissaoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SoAdmissaoMouseClicked
+        if(SoAdmissao.isSelected()){
+            AcAdmissao.setSelected(true);
+            AcAdmissao.setEnabled(false);
+        }else{
+            AcAdmissao.setSelected(false);
+            AcAdmissao.setEnabled(true);
+        }
+    }//GEN-LAST:event_SoAdmissaoMouseClicked
+
+    private void ApAdmissaoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ApAdmissaoMouseClicked
+        if(ApAdmissao.isSelected()){
+            AcAdmissao.setSelected(true);
+            AcAdmissao.setEnabled(false);
+            SoAdmissao.setSelected(true);
+            SoAdmissao.setEnabled(false);
+        }else{
+            AcAdmissao.setSelected(false);
+            AcAdmissao.setEnabled(true);
+            SoAdmissao.setSelected(false);
+            SoAdmissao.setEnabled(true);
+        }
+    }//GEN-LAST:event_ApAdmissaoMouseClicked
+
+    private void ApDemissaoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ApDemissaoMouseClicked
+        if(ApDemissao.isSelected()){
+            AcDemissao.setSelected(true);
+            AcDemissao.setEnabled(false);
+            SoDemissao.setSelected(true);
+            SoDemissao.setEnabled(false);
+        }else{
+            AcDemissao.setSelected(false);
+            AcDemissao.setEnabled(true);
+            SoDemissao.setSelected(false);
+            SoDemissao.setEnabled(true);
+        }
+    }//GEN-LAST:event_ApDemissaoMouseClicked
+
+    private void NaRHMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NaRHMouseClicked
+        if(NaRH.isSelected()){
+            NaADM.setSelected(false);
+            NaUP.setSelected(false);
+        }
+    }//GEN-LAST:event_NaRHMouseClicked
+
+    private void NaADMMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NaADMMouseClicked
+        if(NaADM.isSelected()){
+            NaRH.setSelected(false);
+            NaUP.setSelected(false);
+        }
+    }//GEN-LAST:event_NaADMMouseClicked
+
+    private void NaUPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NaUPMouseClicked
+        if(NaUP.isSelected()){
+            NaADM.setSelected(false);
+            NaRH.setSelected(false);
+        }
+    }//GEN-LAST:event_NaUPMouseClicked
 
     /**
      * @param args the command line arguments
@@ -379,11 +633,15 @@ public class CadastroUsuario extends javax.swing.JDialog {
     private javax.swing.JTextField CpEmail;
     private javax.swing.JTextField CpLogin;
     private javax.swing.JTextField CpNome;
+    private javax.swing.JRadioButton NaADM;
+    private javax.swing.JRadioButton NaRH;
+    private javax.swing.JRadioButton NaUP;
     private javax.swing.JCheckBox SoAdmissao;
     private javax.swing.JCheckBox SoDemissao;
     private javax.swing.JCheckBox SoFerias;
     private javax.swing.JCheckBox SoPromocao;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel3;
@@ -393,5 +651,6 @@ public class CadastroUsuario extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
     // End of variables declaration//GEN-END:variables
 }
